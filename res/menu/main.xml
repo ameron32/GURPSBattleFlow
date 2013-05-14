@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/i_back_to_start" 
+        android:title="Back to Start"/>
+    <item android:id="@+id/i_jump_to" 
+        android:title="Jump To..."/>
+    <item android:id="@+id/i_end_combat" 
+        android:title="End Combat"/>
+    <item android:id="@+id/i_redownload" 
+        android:title="Force Redownload"/>
+    <item android:id="@+id/i_finish" 
+        android:title="Exit"/>
+
+
+</menu>

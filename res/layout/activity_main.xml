@@ -1,0 +1,75 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tvStepName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="name" />
+
+        <TextView
+            android:id="@+id/tvStepDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvStepName"
+            android:layout_marginTop="12dp"
+            android:text="desc" />
+
+        <ImageView
+            android:id="@+id/ivStepImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvStepDescription"
+            android:layout_marginTop="12dp" />
+
+        <LinearLayout
+            android:id="@+id/llRefs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/ivStepImage"
+            android:layout_margin="4dp"
+            android:layout_marginTop="12dp"
+            android:background="#666666"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/llSplitTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/llRefs"
+            android:layout_margin="4dp"
+            android:layout_marginTop="12dp"
+            android:background="#333333"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/llGoTo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/llSplitTo"
+            android:layout_margin="4dp"
+            android:layout_marginTop="12dp"
+            android:background="#000000"
+            android:orientation="vertical" />
+
+    </RelativeLayout>
+
+</ScrollView>
