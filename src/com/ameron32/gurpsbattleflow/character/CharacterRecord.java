@@ -1,20 +1,27 @@
-package com.ameron32.gurpsbattleflow;
+package com.ameron32.gurpsbattleflow.character;
 
 import java.io.Serializable;
 
-import com.ameron32.gurpsbattleflow.damage.Roll;
+import com.ameron32.gurpsbattleflow.damage.*;
+import com.ameron32.gurpsbattleflow.items.DamageReceiver;
+import com.ameron32.gurpsbattleflow.items.DamageReducer;
+import com.ameron32.gurpsbattleflow.items.Inventory;
 
-public class CharacterRecord implements Serializable {
+public class CharacterRecord implements Serializable, DamageReducer, DamageReceiver {
     private static final long serialVersionUID = 3258519085442584964L;
 
     // TODO going down the inputs and making simple data loaders
     // TODO don't forget to use a "clone" constructor
     // TODO DB isn't right, double check it
-    // TODO an inventory and equipment system is a must
-    // TODO don't forget to move Roll
-    // TODO make meleeAttack and rangedAttack implement from attack or
-    // some other damage dealing effect
     // TODO generate getters and setters AFTER item implementation
+    
+    /**
+     * How to use CharacterRecord | Creating a CharacterRecord: So, you create a
+     * character in GURPS using a pretty standard order of operations. Let's
+     * design a CharacterRecord in the same order.
+     * 
+     * @author klemeilleur
+     */
     
     
     /**
@@ -27,14 +34,14 @@ public class CharacterRecord implements Serializable {
         shieldSkill,            // convert to Skill[shield]
         sm;
     boolean combatRef;
-    MeleeAttack[] mAttackOptions;
+//  MeleeAttack[] mAttackOptions;   // stored within MeleeWeapon
     String shield;              // covert to item(shield)
-    RangedAttack[] rAttackOptions;
+//  RangedAttack[] rAttackOptions;  // stored within RangedWeapon
 //  Skill[] skills;
-//  Trait[] traits;
+//  Trait[] traits;             // aka Advantages
 //  EquippedArmor[] armor;
 //  EquippedWeapon[] weapons;
-    // TODO some form of Inventory management
+    Inventory inventory;
     
     short genericArmor;         // replace with inventory + equipment
     float extraWeight;          // replace with inventoried items
@@ -113,9 +120,9 @@ public class CharacterRecord implements Serializable {
         this.shieldSkill = source.shieldSkill;
         this.sm = source.sm;
         this.combatRef = source.combatRef;
-        this.mAttackOptions = source.mAttackOptions;
+//        this.mAttackOptions = source.mAttackOptions;
         this.shield = source.shield;
-        this.rAttackOptions = source.rAttackOptions;
+//        this.rAttackOptions = source.rAttackOptions;
         this.genericArmor = source.genericArmor;
         this.extraWeight = source.extraWeight;
         this.thrust = source.thrust;
@@ -133,6 +140,7 @@ public class CharacterRecord implements Serializable {
         this.db = source.db;
         this.basicSpeed = source.basicSpeed;
         this.encMulti = source.encMulti;
+        this.inventory = source.inventory;
     }
     
 
@@ -235,6 +243,27 @@ public class CharacterRecord implements Serializable {
     public static final int DODGE_ENHANCED = 1;
     public static final int PARRY_ENHANCED = 2;
     public static final int BLOCK_ENHANCED = 3;
+
+    
+    
+    /**
+     * RESPOND TO INCOMING EVENTS
+     */
+    
+    
+    @Override
+    public void takeDamage(Damage d) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void reduceDamage(Damage d) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
     
     
 }

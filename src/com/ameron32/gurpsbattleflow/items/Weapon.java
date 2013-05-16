@@ -1,7 +1,7 @@
 
 package com.ameron32.gurpsbattleflow.items;
 
-public class Weapon extends Item {
+public abstract class Weapon extends Item {
     private static final long serialVersionUID = 4585651326671906498L;
 
     String weaponGroup;

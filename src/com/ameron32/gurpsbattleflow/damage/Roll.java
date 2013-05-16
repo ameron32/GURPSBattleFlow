@@ -6,8 +6,8 @@ public class Roll {
     short[] roll = new short[2];
     
     public Roll (int die, int bonus) {
-        roll[0] = (short)die;
-        roll[1] = (short)bonus;
+        roll[0] = (short) die;
+        roll[1] = (short) bonus;
     }
     
     public short[] getRoll () {
@@ -21,5 +21,7 @@ public class Roll {
     public short getBonus () {
         return roll[1];
     }
+    
+    
 }
 

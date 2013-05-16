@@ -14,6 +14,4 @@ public class Inventory {
         if (myBackpackItems == null) myBackpackItems = new Hashtable<Integer, Item>();
     }
     
-    
-    
 }
