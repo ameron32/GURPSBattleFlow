@@ -54,9 +54,15 @@ public class Item implements Serializable {
     }
 
     
+    /**
+     * PERSONALIZE
+     */
+    String pName, pDescription; 
     
-    
-    
+    public void personalize(String pName, String pDescription) {
+        this.pName = pName;
+        this.pDescription = pDescription;
+    }
     
     /**
      * REFERENCES

@@ -4,9 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import com.ameron32.libgurps.Advantage;
-
-
 public class Importer {
 	public enum ImportType {
 		Advantage, Skill, 
@@ -85,19 +82,19 @@ public class Importer {
 
 	private void readAdv(List list, int ver)
 			throws IOException, FileNotFoundException {
-
-	    /**
-	     * Import version 155
-	     */
-		Advantage oneAdvantage = new Advantage(
-                getInt("iId"), getString("sAorD"), getString("sName"), getString("sAdvType"),
-                getString("sSuperType"), getString("sBookCost"), getInt("iPage"),
-                getBoolean("isLeveled"), getBoolean("isMultiCost"), getBoolean("isVariableCost"),
-                getInt("iBaseCost"), getString("sMultiCost"), getInt("iPerLevelCost"),
-                getString("sPerLevelMultiCost"), getBoolean("hasNotes"), getBoolean("isFakeCost"),
-                getInt("iCalcCost"), getBoolean("isForbidden"), getString("sListPMSESM"),
-                getString("sRefs"), getString("sDescription"));
-
+//
+//	    /**
+//	     * Import version 155
+//	     */
+//		Advantage oneAdvantage = new Advantage(
+//                getInt("iId"), getString("sAorD"), getString("sName"), getString("sAdvType"),
+//                getString("sSuperType"), getString("sBookCost"), getInt("iPage"),
+//                getBoolean("isLeveled"), getBoolean("isMultiCost"), getBoolean("isVariableCost"),
+//                getInt("iBaseCost"), getString("sMultiCost"), getInt("iPerLevelCost"),
+//                getString("sPerLevelMultiCost"), getBoolean("hasNotes"), getBoolean("isFakeCost"),
+//                getInt("iCalcCost"), getBoolean("isForbidden"), getString("sListPMSESM"),
+//                getString("sRefs"), getString("sDescription"));
+//
 //				getInt("id"), 
 //				ver,
 //				getString("aORd"),
@@ -118,8 +115,8 @@ public class Importer {
 //				getBoolean("isMundane"),
 //				getBoolean("isForbidden"),
 //				getString("description"));  
-		        
-		list.add(oneAdvantage);
+//		        
+//		list.add(oneAdvantage);
 	}
 /*
 	private void readSkill(List list, int ver)
