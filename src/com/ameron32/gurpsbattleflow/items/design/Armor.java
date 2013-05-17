@@ -1,5 +1,5 @@
 
-package com.ameron32.gurpsbattleflow.items;
+package com.ameron32.gurpsbattleflow.items.design;
 
 public class Armor extends Item {
     private static final long serialVersionUID = 3592351610507935292L;
@@ -49,4 +49,5 @@ public class Armor extends Item {
         this.don = source.don;
         this.holdout = source.holdout;
     }
+
 }

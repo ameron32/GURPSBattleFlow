@@ -1,5 +1,5 @@
 
-package com.ameron32.gurpsbattleflow.items;
+package com.ameron32.gurpsbattleflow.items.design;
 
 public abstract class Weapon extends Item {
     private static final long serialVersionUID = 4585651326671906498L;

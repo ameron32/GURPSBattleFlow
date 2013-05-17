@@ -1,13 +1,20 @@
 
-package com.ameron32.gurpsbattleflow.items;
+package com.ameron32.gurpsbattleflow.items.design;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ameron32.gurpsbattleflow.damage.Damage;
+import com.ameron32.gurpsbattleflow.items.frmwk.Attachable;
+import com.ameron32.gurpsbattleflow.items.frmwk.AttachmentCarrier;
+import com.ameron32.gurpsbattleflow.items.frmwk.DamageGenerator;
+import com.ameron32.gurpsbattleflow.items.frmwk.DamageReceiver;
+import com.ameron32.gurpsbattleflow.items.frmwk.DamageReducer;
+import com.ameron32.gurpsbattleflow.items.frmwk.Equippable;
+import com.ameron32.gurpsbattleflow.items.frmwk.EquipmentUser;
 
-public class Item implements Serializable, DamageGenerator, DamageReducer {
+public class Item implements Serializable, DamageGenerator, DamageReducer, Equippable, AttachmentCarrier {
     private static final long serialVersionUID = -4962512586546099923L;
 
     // TODO Notes: consider interfaces for Ownable, Personalizable/Customizable
@@ -39,9 +46,9 @@ public class Item implements Serializable, DamageGenerator, DamageReducer {
         this.cost = cost;
         this.tl = tl;
         this.weight = weight;
+        this.itemType = determineItemType(this);
         this.specialNotes = specialNotes;
         this.description = description;
-        this.itemType = determineItemType(this);
     }
 
     /**
@@ -58,6 +65,8 @@ public class Item implements Serializable, DamageGenerator, DamageReducer {
         this.itemType = source.itemType;
         this.specialNotes = source.specialNotes;
         this.description = source.description;
+        
+        this.user = source.user;      // TODO need to reEquip?
     }
 
     
@@ -65,15 +74,10 @@ public class Item implements Serializable, DamageGenerator, DamageReducer {
      * PERSONALIZE
      */
     String pName, pDescription; 
-    boolean isEquipped;
     
     public void personalize(String pName, String pDescription) {
         this.pName = pName;
         this.pDescription = pDescription;
-    }
-    
-    public void setIsEquipped(boolean isEquipped) {
-        this.isEquipped = isEquipped; 
     }
     
     /**
@@ -136,4 +140,48 @@ public class Item implements Serializable, DamageGenerator, DamageReducer {
         // TODO Auto-generated method stub
         
     }
+
+    // EQUIP
+    EquipmentUser user;
+    @Override
+    public boolean equipTo(EquipmentUser eu) {
+        user = eu;
+        return true;
+        // TODO add slot item replacement and restrictions
+    }
+    
+    @Override
+    public boolean unequip() {
+        user = null;
+        return true;
+    }
+    
+    @Override
+    public boolean isEquipped() {
+        return !(user == null);
+    }
+
+    @Override
+    public EquipmentUser getEquippedBy() {
+        return user;
+    }
+    
+
+    
+    // ATTACHMENTCARRIER
+    List<Attachable> attachments;
+    @Override
+    public void attach(Attachable a) {
+        // TODO Auto-generated method stub
+        if (a == null) attachments = new ArrayList<Attachable>();
+        if (a != this) attachments.add(a);
+    }
+    
+    @Override
+    public void remove(Attachable a) {
+        // TODO Auto-generated method stub
+        if (attachments.contains(a)) attachments.remove(a);
+    }
+
+
 }

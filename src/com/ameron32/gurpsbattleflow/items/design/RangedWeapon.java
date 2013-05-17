@@ -1,4 +1,4 @@
-package com.ameron32.gurpsbattleflow.items;
+package com.ameron32.gurpsbattleflow.items.design;
 
 public class RangedWeapon extends Weapon{
     private static final long serialVersionUID = 2944636000386485087L;
