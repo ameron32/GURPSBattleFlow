@@ -11,6 +11,12 @@ import com.ameron32.gurpsbattleflow.items.frmwk.DamageReducer;
 import com.ameron32.gurpsbattleflow.items.frmwk.Equippable;
 import com.ameron32.gurpsbattleflow.items.frmwk.EquipmentUser;
 
+/**
+ * How to use CharacterRecord | Creating a CharacterRecord: So, you create a
+ * character in GURPS using a pretty standard order of operations. Let's
+ * design a CharacterRecord in the same order.
+ * @author klemeilleur
+ */
 public class CharacterRecord implements Serializable, DamageReducer, DamageReceiver, EquipmentUser {
     private static final long serialVersionUID = 3258519085442584964L;
 
@@ -19,83 +25,76 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
     // TODO DB isn't right, double check it
     // TODO generate getters and setters AFTER item implementation
 
-    /**
-     * How to use CharacterRecord | Creating a CharacterRecord: So, you create a
-     * character in GURPS using a pretty standard order of operations. Let's
-     * design a CharacterRecord in the same order.
-     * 
-     * @author klemeilleur
-     */
 
-    /**
+
+    /*
      * INPUTS
      */
-    CharacterType characterType;
-    short st, dx, iq, ht,
-            enhancedMove, enhancedDodge, enhancedParry, enhancedBlock,
-            strikingST, liftingST,
-            shieldSkill, // convert to Skill[shield]
-            sm;
-    boolean combatRef;
+    CharacterType mCharacterType;
+    short mST, mDX, mIQ, mHT,
+            mEnhancedMove, mEnhancedDodge, mEnhancedParry, mEnhancedBlock,
+            mStrikingST, mLiftingST,
+            mShieldSkill, // convert to Skill[shield]
+            mSM;
+    boolean mCombatRef;
     // MeleeAttack[] mAttackOptions; // stored within MeleeWeapon
-    String shield; // covert to item(shield)
+    String mShield; // covert to item(shield)
     // RangedAttack[] rAttackOptions; // stored within RangedWeapon
     // Skill[] skills;
     // Trait[] traits; // aka Advantages
-    Inventory inventory;
+    Inventory mInventory;
 
-    short genericArmor; // replace with inventory + equipment
-    float extraWeight; // replace with inventoried items
+    short mGenericArmor; // replace with inventory + equipment
+    float mExtraWeight; // replace with inventoried items
 
     /**
      * Create a new CharacterRecord. Use setEnhanced(), setStrikingST(),
      * setLiftingST(), and setSizeModifier() if needed. Use finalize() to
      * process the auto-calculate fields.
-     * 
-     * @param st
-     * @param dx
-     * @param iq
-     * @param ht
+     * @param st Strength
+     * @param dx Dexterity
+     * @param iq Intelligence
+     * @param ht Health
      */
     public CharacterRecord(int st, int dx, int iq, int ht) {
-        this.st = (short) st;
-        this.dx = (short) dx;
-        this.iq = (short) iq;
-        this.ht = (short) ht;
-        enhancedMove = enhancedDodge = enhancedParry = enhancedBlock = 0;
-        strikingST = liftingST = 0;
-        sm = 0;
+        this.mST = (short) st;
+        this.mDX = (short) dx;
+        this.mIQ = (short) iq;
+        this.mHT = (short) ht;
+        mEnhancedMove = mEnhancedDodge = mEnhancedParry = mEnhancedBlock = 0;
+        mStrikingST = mLiftingST = 0;
+        mSM = 0;
     }
 
     public void setEnhanced(int... enhancement) {
         for (int e : enhancement) {
             switch (e) {
                 case MOVE_ENHANCED:
-                    enhancedMove = 1;
+                    mEnhancedMove = 1;
                     break;
                 case DODGE_ENHANCED:
-                    enhancedDodge = 1;
+                    mEnhancedDodge = 1;
                     break;
                 case PARRY_ENHANCED:
-                    enhancedParry = 1;
+                    mEnhancedParry = 1;
                     break;
                 case BLOCK_ENHANCED:
-                    enhancedBlock = 1;
+                    mEnhancedBlock = 1;
                     break;
             }
         }
     }
 
     public void setStrikingST(int strikingST) {
-        this.strikingST = (short) strikingST;
+        this.mStrikingST = (short) strikingST;
     }
 
     public void setLiftingST(int liftingST) {
-        this.liftingST = (short) liftingST;
+        this.mLiftingST = (short) liftingST;
     }
 
     public void setSizeModifier(int sm) {
-        this.sm = (short) sm;
+        this.mSM = (short) sm;
     }
 
     public void finalize() {
@@ -104,97 +103,96 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
 
     /**
      * Duplicate an existing character record.
-     * 
-     * @param record
+     * @param record Record to copy
      */
     public CharacterRecord(CharacterRecord source) {
-        this.characterType = source.characterType;
-        this.st = source.st;
-        this.dx = source.dx;
-        this.iq = source.iq;
-        this.ht = source.ht;
-        this.enhancedMove = source.enhancedMove;
-        this.enhancedDodge = source.enhancedDodge;
-        this.enhancedParry = source.enhancedParry;
-        this.enhancedBlock = source.enhancedBlock;
-        this.strikingST = source.strikingST;
-        this.liftingST = source.liftingST;
-        this.shieldSkill = source.shieldSkill;
-        this.sm = source.sm;
-        this.combatRef = source.combatRef;
+        this.mCharacterType = source.mCharacterType;
+        this.mST = source.mST;
+        this.mDX = source.mDX;
+        this.mIQ = source.mIQ;
+        this.mHT = source.mHT;
+        this.mEnhancedMove = source.mEnhancedMove;
+        this.mEnhancedDodge = source.mEnhancedDodge;
+        this.mEnhancedParry = source.mEnhancedParry;
+        this.mEnhancedBlock = source.mEnhancedBlock;
+        this.mStrikingST = source.mStrikingST;
+        this.mLiftingST = source.mLiftingST;
+        this.mShieldSkill = source.mShieldSkill;
+        this.mSM = source.mSM;
+        this.mCombatRef = source.mCombatRef;
         // this.mAttackOptions = source.mAttackOptions;
-        this.shield = source.shield;
+        this.mShield = source.mShield;
         // this.rAttackOptions = source.rAttackOptions;
-        this.genericArmor = source.genericArmor;
-        this.extraWeight = source.extraWeight;
-        this.thrust = source.thrust;
-        this.swing = source.swing;
-        this.basicLift = source.basicLift;
-        this.combatLoad = source.combatLoad;
-        this.basicMove = source.basicMove;
-        this.move = source.move;
-        this.dodge = source.dodge;
-        this.hp = source.hp;
-        this.will = source.will;
-        this.per = source.per;
-        this.fatigue = source.fatigue;
-        this.block = source.block;
-        this.db = source.db;
-        this.basicSpeed = source.basicSpeed;
-        this.encMulti = source.encMulti;
-        this.inventory = source.inventory;
+        this.mGenericArmor = source.mGenericArmor;
+        this.mExtraWeight = source.mExtraWeight;
+        this.mThrust = source.mThrust;
+        this.mSwing = source.mSwing;
+        this.mBasicLift = source.mBasicLift;
+        this.mCombatLoad = source.mCombatLoad;
+        this.mBasicMove = source.mBasicMove;
+        this.mMove = source.mMove;
+        this.mDodge = source.mDodge;
+        this.mHP = source.mHP;
+        this.mWill = source.mWill;
+        this.mPer = source.mPer;
+        this.mFatigue = source.mFatigue;
+        this.mBlock = source.mBlock;
+        this.mDB = source.mDB;
+        this.mBasicSpeed = source.mBasicSpeed;
+        this.mEncMulti = source.mEncMulti;
+        this.mInventory = source.mInventory;
     }
 
-    /**
+    /*
      * CALCULATABLES
      */
-    Roll thrust, swing;
-    short basicLift, combatLoad,
-            basicMove, move, dodge,
-            hp, will, per, fatigue,
-            block, db;
-    float basicSpeed;
-    float encMulti;
+    Roll mThrust, mSwing;
+    short mBasicLift, mCombatLoad,
+            mBasicMove, mMove, mDodge,
+            mHP, mWill, mPer, mFatigue,
+            mBlock, mDB;
+    float mBasicSpeed;
+    float mEncMulti;
 
     private void calculate() {
-        basicLift = (short) (((st + liftingST) * (st + liftingST)) / 5);
+        mBasicLift = (short) (((mST + mLiftingST) * (mST + mLiftingST)) / 5);
         // TODO should be allEquippedMeleeWeapons.weight +
         // allEquippedRangedWeapons.weight
         // + EquippedShield.weight + EquippedArmor.weight +
         // allInventoryItems.weight
-        combatLoad = 0;
-        if (combatLoad < basicLift + 1)
-            encMulti = 1.0f;
-        else if (combatLoad < (basicLift * 2) + 1)
-            encMulti = 0.8f;
-        else if (combatLoad < (basicLift * 3) + 1)
-            encMulti = 0.6f;
-        else if (combatLoad < (basicLift * 4) + 1)
-            encMulti = 0.4f;
-        else if (combatLoad < (basicLift * 5) + 1)
-            encMulti = 0.2f;
+        mCombatLoad = 0;
+        if (mCombatLoad < mBasicLift + 1)
+            mEncMulti = 1.0f;
+        else if (mCombatLoad < (mBasicLift * 2) + 1)
+            mEncMulti = 0.8f;
+        else if (mCombatLoad < (mBasicLift * 3) + 1)
+            mEncMulti = 0.6f;
+        else if (mCombatLoad < (mBasicLift * 4) + 1)
+            mEncMulti = 0.4f;
+        else if (mCombatLoad < (mBasicLift * 5) + 1)
+            mEncMulti = 0.2f;
         else
-            encMulti = 0.0f;
-        basicSpeed = (float) (dx + ht) / 4.0f;
-        basicMove = (short) (Math.round(basicSpeed));
-        move = (short) (Math.round((float) (basicMove + enhancedMove) * encMulti));
+            mEncMulti = 0.0f;
+        mBasicSpeed = (float) (mDX + mHT) / 4.0f;
+        mBasicMove = (short) (Math.round(mBasicSpeed));
+        mMove = (short) (Math.round((float) (mBasicMove + mEnhancedMove) * mEncMulti));
         short n1;
-        db = 0; // shield db? // need doublecheck
-        dodge = (short) ((Math.round(basicSpeed) + 3
-                + (n1 = (short) ((combatRef) ? 1 : 0)) + enhancedDodge
-                + db // shield DB? // need doublecheck
-        - (n1 = (short) ((encMulti == 0.0f) ? 10 : Math.round(5.0f - (encMulti * 5.0f)))) // dodge
+        mDB = 0; // shield db? // need doublecheck
+        mDodge = (short) ((Math.round(mBasicSpeed) + 3
+                + (n1 = (short) ((mCombatRef) ? 1 : 0)) + mEnhancedDodge
+                + mDB // shield DB? // need doublecheck
+        - (n1 = (short) ((mEncMulti == 0.0f) ? 10 : Math.round(5.0f - (mEncMulti * 5.0f)))) // dodge
         ));
-        hp = st;
-        will = per = iq;
-        fatigue = ht;
-        block = (short) (Math.round(((shieldSkill / 2) + 3
-                + db // shield db? // need doublecheck
-        + (n1 = (short) ((combatRef) ? 1 : 0)))
-                + enhancedBlock));
+        mHP = mST;
+        mWill = mPer = mIQ;
+        mFatigue = mHT;
+        mBlock = (short) (Math.round(((mShieldSkill / 2) + 3
+                + mDB // shield db? // need doublecheck
+        + (n1 = (short) ((mCombatRef) ? 1 : 0)))
+                + mEnhancedBlock));
     }
 
-    /**
+    /*
      * REFERENCES
      */
     public enum CharacterType {
@@ -203,7 +201,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
 
     // TODO not final place
     private class MeleeAttack {
-        /**
+        /*
          * INPUTS
          */
         // String attackName; // convert to weapon + attackType
@@ -211,7 +209,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
         short skill, damageBonus_Die;
         String weaponQuality; // replace into attackWeapon item(weapon)
 
-        /**
+        /*
          * CALCULATABLES
          */
         short parry;
@@ -222,7 +220,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
 
     // TODO not final place
     private class RangedAttack {
-        /**
+        /*
          * INPUTS
          */
         // String attackName; // convert to weapon + attackType
@@ -230,7 +228,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
         short skill, damageBonus_Die;
         String weaponQuality; // replace into attackWeapon item(weapon)
 
-        /**
+        /*
          * CALCULATABLES
          */
         Roll damage;
@@ -244,7 +242,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
     public static final int PARRY_ENHANCED = 2;
     public static final int BLOCK_ENHANCED = 3;
 
-    /**
+    /*
      * RESPOND TO INCOMING EVENTS
      */
 
