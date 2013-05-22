@@ -15,7 +15,7 @@ public class Inventory {
         if (myBackpackItems == null) myBackpackItems = new ArrayList<Item>();
     }
 
-    public List<Armor> getEquippedArmor() {
+    private List<Armor> getEquippedArmor() {
         List<Armor> equipped = new ArrayList<Armor>();
         for (Item item : getEquippedItems()) {
             if (item instanceof Armor) 
@@ -24,7 +24,7 @@ public class Inventory {
         return equipped;
     }
     
-    public List<Weapon> getEquippedWeapons() {
+    private List<Weapon> getEquippedWeapons() {
         List<Weapon> equipped = new ArrayList<Weapon>();
         for (Item item : getEquippedItems()) {
             if (item instanceof Weapon) 
@@ -33,7 +33,7 @@ public class Inventory {
         return equipped;
     }
     
-    public List<Item> getEquippedItems() {
+    private List<Item> getEquippedItems() {
         List<Item> equipped = new ArrayList<Item>();
         for (Item item : myBackpackItems) {
             if (item.isEquipped())
@@ -42,7 +42,15 @@ public class Inventory {
         return equipped;
     }
     
-    public List<Item> getInventory() {
+    private List<Item> getInventory() {
         return myBackpackItems;
+    }
+    
+    public float getInventoryTotalWeight() {
+        float total = 0.0f;
+        for (Item item : getInventory()) {
+            total += item.getWeight();
+        }
+        return total;
     }
 }

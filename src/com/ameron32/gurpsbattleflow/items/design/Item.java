@@ -183,5 +183,79 @@ public class Item implements Serializable, DamageGenerator, DamageReducer, Equip
         if (attachments.contains(a)) attachments.remove(a);
     }
 
+    
+    
+    
+    /*
+     * GETTERS AND SETTERS
+     */
+        
+    
+    public String getSpecialNotes() {
+        return specialNotes;
+    }
+
+    public void setSpecialNotes(String specialNotes) {
+        this.specialNotes = specialNotes;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
+    }
+
+    public String getpDescription() {
+        return pDescription;
+    }
+
+    public void setpDescription(String pDescription) {
+        this.pDescription = pDescription;
+    }
+
+    public EquipmentUser getUser() {
+        return user;
+    }
+
+    public void setUser(EquipmentUser user) {
+        this.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public short getTl() {
+        return tl;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public List<Attachable> getAttachments() {
+        return attachments;
+    }
+    
+    
+
 
 }

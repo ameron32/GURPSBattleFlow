@@ -147,12 +147,12 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
      * CALCULATABLES
      */
     Roll mThrust, mSwing;
-    short mBasicLift, mCombatLoad,
+    short mBasicLift,
             mBasicMove, mMove, mDodge,
             mHP, mWill, mPer, mFatigue,
             mBlock, mDB;
     float mBasicSpeed;
-    float mEncMulti;
+    float mEncMulti, mCombatLoad;
 
     private void calculate() {
         mBasicLift = (short) (((mST + mLiftingST) * (mST + mLiftingST)) / 5);
@@ -160,7 +160,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
         // allEquippedRangedWeapons.weight
         // + EquippedShield.weight + EquippedArmor.weight +
         // allInventoryItems.weight
-        mCombatLoad = 0;
+        mCombatLoad = mInventory.getInventoryTotalWeight();
         if (mCombatLoad < mBasicLift + 1)
             mEncMulti = 1.0f;
         else if (mCombatLoad < (mBasicLift * 2) + 1)
@@ -176,19 +176,17 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
         mBasicSpeed = (float) (mDX + mHT) / 4.0f;
         mBasicMove = (short) (Math.round(mBasicSpeed));
         mMove = (short) (Math.round((float) (mBasicMove + mEnhancedMove) * mEncMulti));
-        short n1;
         mDB = 0; // shield db? // need doublecheck
         mDodge = (short) ((Math.round(mBasicSpeed) + 3
-                + (n1 = (short) ((mCombatRef) ? 1 : 0)) + mEnhancedDodge
+                + ((short) ((mCombatRef) ? 1 : 0)) + mEnhancedDodge
                 + mDB // shield DB? // need doublecheck
-        - (n1 = (short) ((mEncMulti == 0.0f) ? 10 : Math.round(5.0f - (mEncMulti * 5.0f)))) // dodge
-        ));
+                - ((short) ((mEncMulti == 0.0f) ? 10 : Math.round(5.0f - (mEncMulti * 5.0f))))));
         mHP = mST;
         mWill = mPer = mIQ;
         mFatigue = mHT;
         mBlock = (short) (Math.round(((mShieldSkill / 2) + 3
                 + mDB // shield db? // need doublecheck
-        + (n1 = (short) ((mCombatRef) ? 1 : 0)))
+                + ((short) ((mCombatRef) ? 1 : 0)))
                 + mEnhancedBlock));
     }
 
