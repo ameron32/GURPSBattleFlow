@@ -1,5 +1,6 @@
 package com.ameron32.gurpsbattleflow.items.design;
 
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,26 +16,36 @@ public class Inventory {
         if (myBackpackItems == null) myBackpackItems = new ArrayList<Item>();
     }
 
-    private List<Armor> getEquippedArmor() {
-        List<Armor> equipped = new ArrayList<Armor>();
+    List<Item> equipped;
+    private List<Item> getEquippedArmor() {
+        if (equipped == null) 
+            equipped = new ArrayList<Item>();
+        else 
+            equipped.clear();
         for (Item item : getEquippedItems()) {
             if (item instanceof Armor) 
-                equipped.add((Armor) item);
+                equipped.add(item);
         }
         return equipped;
     }
     
-    private List<Weapon> getEquippedWeapons() {
-        List<Weapon> equipped = new ArrayList<Weapon>();
+    private List<Item> getEquippedWeapons() {
+        if (equipped == null) 
+            equipped = new ArrayList<Item>();
+        else 
+            equipped.clear();
         for (Item item : getEquippedItems()) {
             if (item instanceof Weapon) 
-                equipped.add((Weapon) item);
+                equipped.add(item);
         }        
         return equipped;
     }
     
     private List<Item> getEquippedItems() {
-        List<Item> equipped = new ArrayList<Item>();
+        if (equipped == null) 
+            equipped = new ArrayList<Item>();
+        else 
+            equipped.clear();
         for (Item item : myBackpackItems) {
             if (item.isEquipped())
                 equipped.add(item);
@@ -42,10 +53,29 @@ public class Inventory {
         return equipped;
     }
     
+    private List<Item> getEquippedShields() {
+        if (equipped == null) 
+            equipped = new ArrayList<Item>();
+        else 
+            equipped.clear();
+        for (Item item : getEquippedItems()) {
+            if (item instanceof Shield) 
+                equipped.add(item);
+        }        
+        return equipped;
+    }
+    
     private List<Item> getInventory() {
         return myBackpackItems;
     }
     
+    
+    
+    
+    
+    /*
+     * PUBLIC ACCESS
+     */
     public float getInventoryTotalWeight() {
         float total = 0.0f;
         for (Item item : getInventory()) {
@@ -53,4 +83,13 @@ public class Inventory {
         }
         return total;
     }
+    
+    public short getEquippedDB() {
+        short total = 0;
+        for (Item item : getEquippedShields()) {
+            total += ((Shield)item).getDb();
+        }
+        return total;
+    }
+    
 }

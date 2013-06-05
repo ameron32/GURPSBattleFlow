@@ -25,7 +25,7 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
     
     
     
-    /**
+    /*
      * RESPOND TO INCOMING EVENTS
      */
 
@@ -34,5 +34,19 @@ public class Shield extends Armor implements DamageGenerator, DamageReducer, Dam
         // TODO Auto-generated method stub
         
     }
+    
+    
+    
+    
+    
+    
+    /*
+     * GETTERS AND SETTERS
+     */
 
+    public short getDb() {
+        return db;
+    }
+    
+    
 }

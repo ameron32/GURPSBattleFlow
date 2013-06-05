@@ -87,7 +87,8 @@ public class Item implements Serializable, DamageGenerator, DamageReducer, Equip
     public enum ItemType {
         Item, 
         Weapon, MeleeWeapon, RangedWeapon, 
-        Armor, Shield
+        Armor, Shield,
+        ProjectileBucket
     }
     
     private ItemType determineItemType(Object o) {
@@ -103,6 +104,8 @@ public class Item implements Serializable, DamageGenerator, DamageReducer, Equip
             return ItemType.Armor;
         else if (o instanceof Item)
             return ItemType.Item;
+        else if (o instanceof ProjectileBucket)
+            return ItemType.ProjectileBucket;
         else return null;
     }
 

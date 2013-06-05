@@ -1,13 +1,17 @@
 
 package com.ameron32.gurpsbattleflow.items.design;
 
+import java.util.List;
+
+import com.ameron32.gurpsbattleflow.attackoptions.AttackOption;
+
 public abstract class Weapon extends Item {
     private static final long serialVersionUID = 4585651326671906498L;
 
     String weaponGroup;
     short minST;
     short quality;
-    // Attack[] attacks;
+    List<AttackOption> attackOptions;
     // EquipLocation[] equipLocation;
     // IdleLocation[] idleLocation;
 

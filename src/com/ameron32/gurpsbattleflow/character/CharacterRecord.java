@@ -36,7 +36,7 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
             mStrikingST, mLiftingST,
             mShieldSkill, // convert to Skill[shield]
             mSM;
-    boolean mCombatRef;
+    boolean mCombatReflexes;
     // MeleeAttack[] mAttackOptions; // stored within MeleeWeapon
     String mShield; // covert to item(shield)
     // RangedAttack[] rAttackOptions; // stored within RangedWeapon
@@ -44,8 +44,6 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
     // Trait[] traits; // aka Advantages
     Inventory mInventory;
 
-    short mGenericArmor; // replace with inventory + equipment
-    float mExtraWeight; // replace with inventoried items
 
     /**
      * Create a new CharacterRecord. Use setEnhanced(), setStrikingST(),
@@ -119,12 +117,8 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
         this.mLiftingST = source.mLiftingST;
         this.mShieldSkill = source.mShieldSkill;
         this.mSM = source.mSM;
-        this.mCombatRef = source.mCombatRef;
-        // this.mAttackOptions = source.mAttackOptions;
+        this.mCombatReflexes = source.mCombatReflexes;
         this.mShield = source.mShield;
-        // this.rAttackOptions = source.rAttackOptions;
-        this.mGenericArmor = source.mGenericArmor;
-        this.mExtraWeight = source.mExtraWeight;
         this.mThrust = source.mThrust;
         this.mSwing = source.mSwing;
         this.mBasicLift = source.mBasicLift;
@@ -156,10 +150,6 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
 
     private void calculate() {
         mBasicLift = (short) (((mST + mLiftingST) * (mST + mLiftingST)) / 5);
-        // TODO should be allEquippedMeleeWeapons.weight +
-        // allEquippedRangedWeapons.weight
-        // + EquippedShield.weight + EquippedArmor.weight +
-        // allInventoryItems.weight
         mCombatLoad = mInventory.getInventoryTotalWeight();
         if (mCombatLoad < mBasicLift + 1)
             mEncMulti = 1.0f;
@@ -176,17 +166,17 @@ public class CharacterRecord implements Serializable, DamageReducer, DamageRecei
         mBasicSpeed = (float) (mDX + mHT) / 4.0f;
         mBasicMove = (short) (Math.round(mBasicSpeed));
         mMove = (short) (Math.round((float) (mBasicMove + mEnhancedMove) * mEncMulti));
-        mDB = 0; // shield db? // need doublecheck
+        mDB = mInventory.getEquippedDB();
         mDodge = (short) ((Math.round(mBasicSpeed) + 3
-                + ((short) ((mCombatRef) ? 1 : 0)) + mEnhancedDodge
-                + mDB // shield DB? // need doublecheck
+                + ((short) ((mCombatReflexes) ? 1 : 0)) + mEnhancedDodge
+                + mDB
                 - ((short) ((mEncMulti == 0.0f) ? 10 : Math.round(5.0f - (mEncMulti * 5.0f))))));
         mHP = mST;
         mWill = mPer = mIQ;
         mFatigue = mHT;
         mBlock = (short) (Math.round(((mShieldSkill / 2) + 3
-                + mDB // shield db? // need doublecheck
-                + ((short) ((mCombatRef) ? 1 : 0)))
+                + mDB
+                + ((short) ((mCombatReflexes) ? 1 : 0)))
                 + mEnhancedBlock));
     }
 
