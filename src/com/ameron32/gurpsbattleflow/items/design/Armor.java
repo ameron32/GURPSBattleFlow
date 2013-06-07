@@ -15,7 +15,7 @@ public class Armor extends Item {
      * @param name
      * @param id
      * @param cost
-     * @param tl
+     * @param i
      * @param weight
      * @param specialNotes
      * @param description
@@ -25,14 +25,14 @@ public class Armor extends Item {
      * @param don
      * @param holdout
      */
-    public Armor(String name, int id, int cost, short tl, float weight, String specialNotes,
-            String description, String material, String[] covers, short dr, short don, short holdout) {
-        super(name, id, cost, tl, weight, specialNotes, description);
+    public Armor(String name, int id, int cost, int i, double weight, String specialNotes,
+            String description, String material, String[] covers, int dr, int don, int holdout) {
+        super(name, id, cost, i, weight, specialNotes, description);
         this.material = material;
         this.covers = covers;
-        this.dr = dr;
-        this.don = don;
-        this.holdout = holdout;
+        this.dr = (short)dr;
+        this.don = (short)don;
+        this.holdout = (short)holdout;
     }
 
 

@@ -39,13 +39,13 @@ public class Item implements Serializable, DamageGenerator, DamageReducer, Equip
      * @param specialNotes
      * @param description
      */
-    public Item(String name, int id, int cost, short tl, float weight, 
+    public Item(String name, int id, int cost, int tl, double weight, 
             String specialNotes, String description) {
         this.name = name;
         this.id = id;
         this.cost = cost;
-        this.tl = tl;
-        this.weight = weight;
+        this.tl = (short)tl;
+        this.weight = (float)weight;
         this.itemType = determineItemType(this);
         this.specialNotes = specialNotes;
         this.description = description;
